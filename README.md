@@ -6,7 +6,7 @@ extract slurm job stats
 Requires python3:
 
     yum install python3-pip python3-devel libyaml-devel
-    pip3 install ClusterInfo
+    pip3 install ClusterShell
 
 To run the script try:
 
