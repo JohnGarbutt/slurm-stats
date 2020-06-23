@@ -1,4 +1,4 @@
-from datetime import datetime
+import datetime
 import subprocess
 from ClusterShell import NodeSet
 
@@ -12,8 +12,8 @@ args = ["sacct", "-X", "--allusers", "--parsable2", "--format",
 SLURM_DATE_FORMAT = "%Y-%m-%dT%H:%M:%S"
 TIMESTAMP_FILE = "lasttimestamp"
 
-# Work out starttime and endtime
-now = datetime.utcnow()
+# Work out statetime and endtime
+now = datetime.datetime.utcnow()
 end_str = now.strftime(SLURM_DATE_FORMAT)
 
 try:
@@ -63,7 +63,9 @@ for line in lines[1:]:
       print(item)
 
 # Write out timestamp, so we know where to start next time
+next = now + datetime.timedelta(seconds=1)
+next_str = next.strftime(SLURM_DATE_FORMAT)
 with open(TIMESTAMP_FILE, 'w') as f:
-   f.write(end_str)
+   f.write(next_str)
 
 #print(len(items))
