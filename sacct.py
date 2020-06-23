@@ -90,4 +90,5 @@ node_info = {
   "start": start_str,
   "end": end_str,
 }
-print(node_info)
+if node_info["node_info"]:
+    print(node_info)
