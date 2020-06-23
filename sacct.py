@@ -69,3 +69,25 @@ with open(TIMESTAMP_FILE, 'w') as f:
    f.write(next_str)
 
 #print(len(items))
+
+# Do a per node summary of job ids
+# TODO: arguments to toggle this output
+import collections
+node_jobs = collections.defaultdict(list)
+jobs = {}
+for job in items:
+    jobs[job["JobID"]] = job
+    for node in job["AllNodes"]:
+        node_jobs[node] += [{
+          "id": job["JobID"],
+          "start": job["Start"],
+          "end": job["End"],
+        }]
+
+#print(jobs)
+node_info = {
+  "node_info": dict(node_jobs),
+  "start": start_str,
+  "end": end_str,
+}
+print(node_info)
