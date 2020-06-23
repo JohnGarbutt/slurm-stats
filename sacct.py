@@ -12,7 +12,7 @@ args = ["sacct", "-X", "--allusers", "--parsable2", "--format",
 SLURM_DATE_FORMAT = "%Y-%m-%dT%H:%M:%S"
 TIMESTAMP_FILE = "lasttimestamp"
 
-# Work out statetime and endtime
+# Work out starttime and endtime
 now = datetime.utcnow()
 end_str = now.strftime(SLURM_DATE_FORMAT)
 
