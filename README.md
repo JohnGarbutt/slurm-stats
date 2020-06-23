@@ -1,7 +1,7 @@
 # slurm-stats
 extract slurm job stats
 
-It uses slurm's sacct to extract job stats.
+It uses slurm's sacct to extract job stats of finished jobs.
 It stores the last timestamp in a file called "lasttimestamp".
 This means the tool can fetch all jobs since the last time stamp.
 If there is no stored timestime it defaults to fetching all jobs since midnight.
@@ -15,4 +15,4 @@ Requires python3:
 
 To run the script, try this cron ready example:
 
-    TZ=UTC python3 sacct.py >>jobstats.txt
+    TZ=UTC python3 sacct.py >>finished_jobs.txt
