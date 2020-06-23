@@ -18,6 +18,7 @@ Requires python3:
 
 To run the script, try this cron ready example:
 
+    rm -f lasttimestamp  # clear any old state, default to today's job
     TZ=UTC python3 sacct.py >>finished_jobs.txt
 
 For example, you would expect output a bit like this:
