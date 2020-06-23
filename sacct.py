@@ -2,7 +2,7 @@ from datetime import datetime
 import subprocess
 from ClusterShell import NodeSet
 
-args = ["sacct", "--allusers", "--parsable2", "--format",
+args = ["sacct", "-X", "--allusers", "--parsable2", "--format",
         "jobid,jobidraw,cluster,partition,account,group,gid,"
         "user,uid,submit,eligible,start,end,elapsed,exitcode,state,nnodes,"
         "ncpus,reqcpus,reqmem,reqgres,reqtres,timelimit,nodelist,jobname",
