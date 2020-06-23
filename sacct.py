@@ -12,6 +12,7 @@ args = ["sacct", "--allusers", "--parsable2", "--format",
 SLURM_DATE_FORMAT = "%Y-%m-%dT%H:%M:%S"
 TIMESTAMP_FILE = "lasttimestamp"
 
+# Work out statetime and endtime
 now = datetime.utcnow()
 end_str = now.strftime(SLURM_DATE_FORMAT)
 
@@ -28,14 +29,17 @@ args += ["--endtime", end_str]
 #print(" ".join(args))
 process = subprocess.run(args, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, encoding="UTF-8")
 
+# Use the title line to work out the attribute order
 lines = process.stdout.split("\n")
 titles_line = lines[0]
 attributes = titles_line.split("|")
 
+# Try to output any errors we might have hit
 if len(attributes) < 3:
     print(lines)
     exit(-1)
 
+# Parse each line of sacct output into a dict
 items = []
 for line in lines[1:]:
   components = line.split("|")
@@ -45,17 +49,20 @@ for line in lines[1:]:
   for i in range(len(attributes)):
       item[attributes[i]] = components[i]
 
+  # Unpack NodeList format, so its easier to search for hostnames
   nodelist = item.get("NodeList")
   if nodelist:
       nodeset = NodeSet.NodeSet(nodelist)
       nodes = list([x for x in nodeset])
       item["AllNodes"] = nodes
-      
+
+  # Exclude job steps
   jobid = item.get("JobID")
   if jobid and "." not in jobid:
       items.append(item)
       print(item)
 
+# Write out timestamp, so we know where to start next time
 with open(TIMESTAMP_FILE, 'w') as f:
    f.write(end_str)
 
