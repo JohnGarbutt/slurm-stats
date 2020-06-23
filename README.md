@@ -13,6 +13,6 @@ Requires python3:
     yum install python3-pip python3-devel libyaml-devel
     pip3 install ClusterShell
 
-To run the script try:
+To run the script, try this cron ready example:
 
-    TZ=UTC python3 sacct.py
+    TZ=UTC python3 sacct.py >>jobstats.txt
