@@ -1,5 +1,7 @@
 import datetime
+import json
 import subprocess
+
 from ClusterShell import NodeSet
 
 args = ["sacct", "-X", "--allusers", "--parsable2", "--format",
@@ -45,9 +47,19 @@ for line in lines[1:]:
   components = line.split("|")
   if len(components) != len(attributes):
       continue
+
   item = {}
   for i in range(len(attributes)):
-      item[attributes[i]] = components[i]
+      key = attributes[i]
+      value = components[i]
+
+      # Try to convert to int
+      if "JobID" not in key:
+          try:
+              value = int(value)
+          except:
+              pass
+      item[key] = value
 
   # Unpack NodeList format, so its easier to search for hostnames
   nodelist = item.get("NodeList")
@@ -60,7 +72,7 @@ for line in lines[1:]:
   jobid = item.get("JobID")
   if jobid and "." not in jobid:
       items.append(item)
-      print(item)
+      print(json.dumps(item))
 
 # Write out timestamp, so we know where to start next time
 next = now + datetime.timedelta(seconds=1)
@@ -90,5 +102,5 @@ node_info = {
   "start": start_str,
   "end": end_str,
 }
-if node_info["node_info"]:
-    print(node_info)
+#if node_info["node_info"]:
+#    print(node_info)
