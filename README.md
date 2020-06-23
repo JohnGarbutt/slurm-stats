@@ -58,6 +58,7 @@ Then execute the setup:
 
 To parse the files as json, add this:
 
+    filebeat.inputs:
     - type: log
       json.add_error_key: true
       paths:
