@@ -19,10 +19,10 @@ try:
     with open(TIMESTAMP_FILE) as f:
         start_str = f.read()
 except FileNotFoundError:
-    start_str = ""
+    # Default to start of today
+    start_str = "00:00:00"
 
-if start_str:
-    args += ["--starttime", start_str]
+args += ["--starttime", start_str]
 args += ["--endtime", end_str]
 
 #print(" ".join(args))
