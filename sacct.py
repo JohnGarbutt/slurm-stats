@@ -6,7 +6,7 @@ from ClusterShell import NodeSet
 
 args = ["sacct", "-X", "--allusers", "--parsable2", "--format",
         "jobid,jobidraw,cluster,partition,account,group,gid,"
-        "user,uid,submit,eligible,start,end,elapsed,exitcode,state,nnodes,"
+        "user,uid,submit,eligible,start,end,elapsed,elapsedraw,exitcode,state,nnodes,"
         "ncpus,reqcpus,reqmem,reqgres,reqtres,timelimit,nodelist,jobname",
         "--state",
         "CANCELLED,COMPLETED,FAILED,NODE_FAIL,PREEMPTED,TIMEOUT"]
