@@ -63,3 +63,13 @@ To parse the files as json, add this:
       json.add_error_key: true
       paths:
          - '/mnt/ohpc/centos/*.json'
+
+To use the end date as the timestamp for the log add this:
+
+    processors:
+      - timestamp:
+        field: json.End
+        layouts:
+          - '2006-01-02T15:04:05'
+        test:
+          - '2020-06-17T10:17:48'
