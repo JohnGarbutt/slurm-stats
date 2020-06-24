@@ -63,7 +63,8 @@ To parse the files as json, add this:
       paths:
         - '/mnt/ohpc/centos/*.json'
       fields:
-        event.kind: 'event'
+        target: event
+        kind: event
       processors:
         - timestamp:
             field: json.End
