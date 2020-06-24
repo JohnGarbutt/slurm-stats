@@ -86,3 +86,8 @@ To parse the files as json, add this:
               - '2006-01-02T15:04:05'
             test:
               - '2020-06-17T10:17:48'
+        - convert:
+            fields:
+              - {from: "json.NNodes", type: "integer"}
+              - {from: "json.NCPUS", type: "integer"}
+              - {from: "json.ElapsedRaw", type: "integer"}
