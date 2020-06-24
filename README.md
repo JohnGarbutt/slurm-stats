@@ -58,32 +58,30 @@ Then execute the setup:
 
 To parse the files as json, add this:
 
-- type: log
-  json.add_error_key: true
-  paths:
-    - '/mnt/ohpc/centos/*.json'
-  fields:
-    event.kind: 'event'
-  processors:
-    - timestamp:
-        field: json.End
-        layouts:
-          - '2006-01-02T15:04:05'
-        test:
-          - '2020-06-17T10:17:48'
-    - timestamp:
-        target_field: 'event.end'
-        field: json.End
-        layouts:
-        layouts:
-          - '2006-01-02T15:04:05'
-        test:
-          - '2020-06-17T10:17:48'
-    - timestamp:
-        target_field: 'event.start'
-        field: json.Start
-        layouts:
-        layouts:
-          - '2006-01-02T15:04:05'
-        test:
-          - '2020-06-17T10:17:48'
+    - type: log
+      json.add_error_key: true
+      paths:
+        - '/mnt/ohpc/centos/*.json'
+      fields:
+        event.kind: 'event'
+      processors:
+        - timestamp:
+            field: json.End
+            layouts:
+              - '2006-01-02T15:04:05'
+            test:
+              - '2020-06-17T10:17:48'
+        - timestamp:
+            target_field: 'event.end'
+            field: json.End
+            layouts:
+              - '2006-01-02T15:04:05'
+            test:
+              - '2020-06-17T10:17:48'
+        - timestamp:
+            target_field: 'event.start'
+            field: json.Start
+            layouts:
+              - '2006-01-02T15:04:05'
+            test:
+              - '2020-06-17T10:17:48'
