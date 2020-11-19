@@ -70,6 +70,14 @@ for line in lines[1:]:
       nodes = list([x for x in nodeset])
       item["AllNodes"] = nodes
 
+  start = item.get("Start")
+  if start:
+      item["StartEpoch"] = int(datetime.datetime.strptime(start, SLURM_DATE_FORMAT).timestamp() * 1000)
+
+  end = item.get("End")
+  if end:
+      item["EndEpoch"] = int(datetime.datetime.strptime(end, SLURM_DATE_FORMAT).timestamp() * 1000)
+
   # Exclude job steps
   jobid = item.get("JobID")
   if jobid and "." not in jobid:
