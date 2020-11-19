@@ -13,13 +13,13 @@ It appears this must be enabled before --starttime and --endtime options work as
 
 Requires python3:
 
-    yum install python3-pip python3-devel libyaml-devel
-    pip3 install ClusterShell
+    python3 -m venv /path/to/venv
+    /path/to/venv/bin/pip install https://github.com/JohnGarbutt/slurm-stats
 
 To run the script, try this cron ready example:
 
     rm -f lasttimestamp  # clear any old state, default to today's job
-    TZ=UTC python3 sacct.py >>finished_jobs.json
+    TZ=UTC /path/to/venv/bin/sacct.py >>finished_jobs.json
 
 For example, you would expect output a bit like this:
 
